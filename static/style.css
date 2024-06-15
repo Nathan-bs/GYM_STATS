@@ -1,0 +1,352 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(#000080, #000);
+    color: rgb(255, 255, 255);
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    padding: 10px 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header img.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+header h1 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+nav {
+    margin-left: auto;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    border: 2px solid white;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: white;
+    color: #000080;
+}
+
+main {
+    padding: 20px;
+}
+
+.post-section {
+    margin-bottom: 40px;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-item {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.img-container {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.post-actions {
+    margin-top: 10px;
+}
+
+form {
+    margin: 20px 0;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    background: #0022ff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.custom-file-upload:hover {
+    background: #000000;
+}
+
+form input[type="number"],
+form button {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+form button {
+    background: #0022ff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form button:hover {
+    background: #000000;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 20px;
+}
+
+.center-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+.center-form input[type="file"],
+.center-form button {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+.center-form button {
+    background: #0022ff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+}
+
+.center-form button:hover {
+    background: #000000;
+}
+
+.center-form-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+.center-form-rating input[type="number"],
+.center-form-rating button {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+.center-form-rating button {
+    background: #0022ff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+}
+
+.center-form-rating button:hover {
+    background: #000000;
+}
+
+.auth-container {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.auth-container form {
+    margin-bottom: 20px;
+}
+
+.auth-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.auth-container input {
+    width: 94%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 10px;
+    background: #0022ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.auth-container button:hover {
+    background: #000000;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #0022ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.action-button:hover {
+    background: #000000;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.options button {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+    background: #0022ff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+}
+
+.options button:hover {
+    background: #000000;
+}
+
+.quiz-answer {
+    margin-top: 20px;
+}
+
+.quiz-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz-question form {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.quiz-question form button {
+    margin-right: 10px; 
+}
+
+.auth-container {
+    background-color: rgb(14, 14, 72);
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Quiz Style */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px; /* Set a max width */
+    border-radius: 10px;
+    text-align: left;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

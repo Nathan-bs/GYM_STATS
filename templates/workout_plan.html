@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Treino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+        <h1>Gym Stats</h1>
+        <nav>
+            <a href="{{ url_for('homePage') }}">Home</a>
+            {% if session['user_id'] %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+                <a href="{{ url_for('quiz') }}">VIP</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login/Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        <h1>Seu Plano de Treino</h1>
+        <pre>{{ workout_plan }}</pre>
+    </main>
+
+    <footer>
+        <p>&copy; By Nathan B. Santos</p>
+    </footer>
+</body>
+</html>

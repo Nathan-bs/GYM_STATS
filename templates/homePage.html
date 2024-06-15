@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+        <h1>Gym Stats</h1>
+        <nav>
+            <a href="{{ url_for('homePage') }}">Home</a>
+            {% if session['user_id'] %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+                <a href="{{ url_for('quiz') }}">VIP</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login/Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% if quiz_question %}
+        <h2>Quiz de Musculação</h2>
+        <div class="quiz-section">
+            <div class="quiz-question">
+                <p>{{ quiz_question }}</p>
+                <form method="post" action="{{ url_for('homePage') }}">
+                    {% for i, option in enumerate(quiz_options) %}
+                    <button type="submit" name="answer" value="{{ option }}">Letra {{ 'abcd'[i] }}: {{ option }}</button>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        <div class="post-section">
+            {% if post %}
+                <h2>Avaliar Imagem</h2>
+                <div class="img-container">
+                    <img src="{{ url_for('static', filename='uploads/' ~ post.image) }}" alt="Imagem">
+                </div>
+                <form method="post" class="center-form-rating">
+                    <label for="rating">Dê sua avaliação (1 a 5 estrelas):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    <button type="submit">Enviar Avaliação</button>
+                </form>
+            {% else %}
+                <h2>Postar Nova Imagem</h2>
+                <form method="post" enctype="multipart/form-data" action="{{ url_for('upload') }}" class="center-form">
+                    <label for="file" class="custom-file-upload">
+                        Escolher Arquivo
+                    </label>
+                    <input type="file" id="file" name="file" required>
+                    <button type="submit">Postar</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <h2>Últimas Postagens</h2>
+        <div class="posts-container">
+            {% for item in posts_with_ratings %}
+            <div class="post-item">
+                <div class="img-container">
+                    <img src="{{ url_for('static', filename='uploads/' ~ item.post.image) }}" alt="Imagem">
+                </div>
+                <p>Média de Avaliações: {{ item.average_rating or "0" }}</p>
+                
+                {% if 'user_id' in session and item.post.user_id == session['user_id'] %}
+                <form action="{{ url_for('delete', id=item.post.id) }}" method="post">
+                    <button type="submit">Excluir</button>
+                </form>
+                {% endif %}
+                
+                <form action="{{ url_for('post', post_id=item.post.id) }}" method="get">
+                    <button type="submit">Avaliar</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; By Nathan B. Santos</p>
+    </footer>
+</body>
+</html>
