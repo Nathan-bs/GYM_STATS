@@ -12,8 +12,7 @@ app.config['SECRET_KEY'] = 'Nathan123'
 app.config['UPLOAD_FOLDER'] = '/home/NathanBatista/mysite/static/uploads'
 app.config['DEBUG'] = True
 
-openai.api_key = 'sk-proj-it3FMvQ0gxBMLYGDpwNqT3BlbkFJ8qFb72ID7COqqLulgokT'
-
+openai.api_key = ''
 db = SQLAlchemy(app)
 
 class User(db.Model):
