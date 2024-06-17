@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import openai
 
-#Strategy (Padrão de Peojeto Comportamental)
+#Strategy (Padrão de Projeto Comportamental)
 class QuestionStrategy(ABC):
     @abstractmethod
     def create_question(self):
