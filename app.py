@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_sqlalchemy import SQLAlchemy
-import os
-import openai
 from factories import MuscleQuestionFactory, OpenAIMuscleQuestionStrategy
-import time
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
+import openai
+import time
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -39,12 +39,14 @@ class Rating(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
 
 with app.app_context():
+    #db.drop_all()
     db.create_all()
 
 def calculate_average_rating(post_id):
     ratings = Rating.query.filter_by(post_id=post_id).all()
     if ratings:
-        return sum(rating.score for rating in ratings) / len(ratings)
+        average = sum(rating.score for rating in ratings) / len(ratings)
+        return f"{average:.2f}"
     return None
 
 def perguntar(prompt):
