@@ -12,7 +12,8 @@ app.config['SECRET_KEY'] = 'Nathan123'
 app.config['UPLOAD_FOLDER'] = '/home/NathanBatista/mysite/static/uploads'
 app.config['DEBUG'] = True
 
-openai.api_key = 'your_key'
+openai.api_key = ''
+
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -48,6 +49,7 @@ def calculate_average_rating(post_id):
         average = sum(rating.score for rating in ratings) / len(ratings)
         return f"{average:.2f}"
     return None
+
 
 def perguntar(prompt):
     response = openai.ChatCompletion.create(
@@ -93,15 +95,16 @@ def homePage():
         try:
             quiz_question, quiz_options, correct_answer = factory.create_question()
             session['correct_answer'] = correct_answer
-            session['quiz_options'] = quiz_options  #Armazena as opções embaralhadas na sessão
+            session['quiz_options'] = quiz_options  # Armazena as opções embaralhadas na sessão
         except ValueError as e:
             quiz_question = "Erro ao gerar a pergunta do quiz: " + str(e)
 
     if request.method == 'POST' and 'answer' in request.form:
         answer = request.form['answer']
         correct_answer = session.get('correct_answer')
-        quiz_options = session.get('quiz_options')  #Recupera as opções embaralhadas da sessão
+        quiz_options = session.get('quiz_options')  # Recupera as opções embaralhadas da sessão
         if answer == correct_answer:
+            session['quiz_passed'] = True  # Define que o usuário passou no quiz
             return redirect(url_for('workout_plan'))
 
     return render_template('homePage.html', posts_with_ratings=posts_with_ratings, quiz_question=quiz_question, quiz_options=quiz_options, enumerate=enumerate)
@@ -147,10 +150,10 @@ def delete(id):
 
     post = Post.query.get(id)
     if not post:
-        return redirect(url_for('homePage'))  #Post não encontrado
+        return redirect(url_for('homePage'))  # Post não encontrado
 
     if post.user_id != session['user_id']:
-        return redirect(url_for('homePage'))  #Usuário não autorizado a excluir
+        return redirect(url_for('homePage'))  # Usuário não autorizado a excluir
 
     db.session.delete(post)
     db.session.commit()
@@ -179,7 +182,7 @@ def register():
         name = request.form['usernameRegister']
         password = request.form['passwordRegister']
 
-        #Verifica se o nome de usuário já existe
+        # Verifica se o nome de usuário já existe
         existing_user = User.query.filter_by(name=name).first()
         if existing_user:
             return render_template('auth.html', error='Username already taken', usuarios=User.query.all(), debug=app.config['DEBUG'])
@@ -216,6 +219,9 @@ def quiz():
 def workout_plan():
     if 'user_id' not in session:
         return redirect(url_for('login'))
+
+    if not session.get('quiz_passed'):
+        return redirect(url_for('homePage'))
 
     workout_plan = perguntar("Crie uma planilha de treino de musculação completa.")
     return render_template('workout_plan.html', workout_plan=workout_plan)
