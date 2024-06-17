@@ -88,19 +88,19 @@ def homePage():
     quiz_question = None
     quiz_options = None
     if 'quiz' in request.args:
-        strategy = OpenAIMuscleQuestionStrategy()  # Pode ser alterado para qualquer outra estratégia
+        strategy = OpenAIMuscleQuestionStrategy()
         factory = MuscleQuestionFactory(strategy)
         try:
             quiz_question, quiz_options, correct_answer = factory.create_question()
             session['correct_answer'] = correct_answer
-            session['quiz_options'] = quiz_options  # Armazena as opções embaralhadas na sessão
+            session['quiz_options'] = quiz_options  #Armazena as opções embaralhadas na sessão
         except ValueError as e:
             quiz_question = "Erro ao gerar a pergunta do quiz: " + str(e)
 
     if request.method == 'POST' and 'answer' in request.form:
         answer = request.form['answer']
         correct_answer = session.get('correct_answer')
-        quiz_options = session.get('quiz_options')  # Recupera as opções embaralhadas da sessão
+        quiz_options = session.get('quiz_options')  #Recupera as opções embaralhadas da sessão
         if answer == correct_answer:
             return redirect(url_for('workout_plan'))
 
@@ -147,10 +147,10 @@ def delete(id):
 
     post = Post.query.get(id)
     if not post:
-        return redirect(url_for('homePage'))  # Post não encontrado
+        return redirect(url_for('homePage'))  #Post não encontrado
 
     if post.user_id != session['user_id']:
-        return redirect(url_for('homePage'))  # Usuário não autorizado a excluir
+        return redirect(url_for('homePage'))  #Usuário não autorizado a excluir
 
     db.session.delete(post)
     db.session.commit()
@@ -179,7 +179,7 @@ def register():
         name = request.form['usernameRegister']
         password = request.form['passwordRegister']
 
-        # Verifica se o nome de usuário já existe
+        #Verifica se o nome de usuário já existe
         existing_user = User.query.filter_by(name=name).first()
         if existing_user:
             return render_template('auth.html', error='Username already taken', usuarios=User.query.all(), debug=app.config['DEBUG'])
