@@ -63,4 +63,3 @@ Templates HTML:
   homePage.html: Template para a página principal com postagens e quiz.
   workout_plan.html: Template privativo para exibir o plano de treino (apenas se responder corretamente ao quiz).
 
-Está no ar desde o dia 15/06/2024, acesse pelo link: nathanbatista.pythonanywhere.com
