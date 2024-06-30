@@ -61,7 +61,7 @@ def perguntar(prompt):
     )
     return response.choices[0].message['content']
 
-#Decorator (Padrão de Projeto Estrutural)
+#Decorator para tempo de execução
 def log_execution_time(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
