@@ -45,7 +45,6 @@ class OpenAIMuscleQuestionStrategy(QuestionStrategy):
         correct_answer = parts[5]
         return question, options, correct_answer
 
-#Factory Method (Padrão de Projeto Criacional)
 class QuestionFactory(ABC):
     @abstractmethod
     def create_question(self):
